@@ -16,18 +16,6 @@ public class AccountsController {
     @Autowired
     private AccountsRepository accountsRepository;
 
-    @GetMapping("/account/details")
-    public List<Accounts> getAllAccountDetails() {
-
-        List<Accounts> accounts = accountsRepository.findAll();
-        if (!accounts.isEmpty()) {
-            return accounts;
-        } else {
-            return null;
-        }
-
-    }
-
     @PostMapping("/myAccount")
     public Accounts getAccountDetails(@RequestBody Customer customer) {
 
