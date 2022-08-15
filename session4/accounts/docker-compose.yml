@@ -1,0 +1,29 @@
+version: "3.8"
+
+services:
+  accounts:
+    image: kishorevbhosale/accounts:latest
+    mem_limit: 700m
+    ports:
+      - "8080:8080"
+    networks:
+      - kishorevbhosale-network
+
+  cards:
+    image: kishorevbhosale/cards:latest
+    mem_limit: 700m
+    ports:
+      - "9000:9000"
+    networks:
+      - kishorevbhosale-network
+
+  loans:
+    image: kishorevbhosale/loans:latest
+    mem_limit: 700m
+    ports:
+      - "8090:8090"
+    networks:
+      - kishorevbhosale-network
+
+networks:
+  kishorevbhosale-network:
