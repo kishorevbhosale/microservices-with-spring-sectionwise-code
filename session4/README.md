@@ -19,3 +19,5 @@ are the key steps that are followed while creating these projects.
 - '@EnableConfigServer'. This annotation will make your microservice to act as a Spring Cloud Config Server.
 - All the 9 property files related to accounts, loans and cards microservices are present under config folder under 
 the path 'configserver\src\main\resources' 
+- Go to your Spring Boot main class ConfigserverApplication.java and right click-> Run As -> Java Application. This will start your Spring Boot application successfully at port 8071 which is the port we configured inside application.properties. Your can confirm the same by looking at the console logs.
+- Access the URLs like http://localhost:8071/accounts/default, http://localhost:8071/loans/dev, http://localhost:8071/cards/prod inside your browser to randomly validate that properties are being read from configured file system by Config Server for all the three microservices accounts, loans and cards.
