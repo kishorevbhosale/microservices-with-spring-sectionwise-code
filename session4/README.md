@@ -14,3 +14,8 @@ are the key steps that are followed while creating these projects.
 - Repeat the above steps for **cards** and **loans** microservices as well.
 - Extract the downloaded maven projects of **accounts, cards, loans** and import the same into Eclipse by following the
   steps mentioned in the course
+- A new microservices 'configserver' is created based on Spring Cloud Config which will act as a Config server. 
+- These three microservices accounts, loans, cards are updated to read the configurations/properties from the 'configserver' microservices.
+- '@EnableConfigServer'. This annotation will make your microservice to act as a Spring Cloud Config Server.
+- All the 9 property files related to accounts, loans and cards microservices are present under config folder under 
+the path 'configserver\src\main\resources' 
