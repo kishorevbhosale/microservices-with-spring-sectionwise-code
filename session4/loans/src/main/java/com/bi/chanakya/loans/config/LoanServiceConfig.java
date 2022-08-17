@@ -1,4 +1,4 @@
-package com.bi.chanakya.accounts.config;
+package com.bi.chanakya.loans.config;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -10,13 +10,14 @@ import java.util.List;
 import java.util.Map;
 
 @Configuration
-@ConfigurationProperties(prefix = "accounts")
+@ConfigurationProperties(prefix = "loans")
 @Getter
 @Setter
 @ToString
-public class AccountServiceConfig {
+public class LoanServiceConfig {
     private String msg;
     private String buildVersion;
     private Map<String, String> mailDetails;
     private List<String> activeBranches;
 }
+

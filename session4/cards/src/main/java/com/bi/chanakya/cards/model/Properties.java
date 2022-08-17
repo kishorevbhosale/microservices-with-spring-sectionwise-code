@@ -1,4 +1,4 @@
-package com.bi.chanakya.accounts.model;
+package com.bi.chanakya.cards.model;
 
 
 import lombok.AllArgsConstructor;

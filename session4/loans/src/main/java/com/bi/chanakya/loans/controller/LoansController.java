@@ -1,9 +1,17 @@
 package com.bi.chanakya.loans.controller;
 
+import com.bi.chanakya.loans.config.LoanServiceConfig;
 import com.bi.chanakya.loans.model.Customer;
 import com.bi.chanakya.loans.model.Loans;
+import com.bi.chanakya.loans.model.Properties;
 import com.bi.chanakya.loans.repository.LoansRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,20 +19,25 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+@AllArgsConstructor
 public class LoansController {
 
-    @Autowired
-    private LoansRepository loansRepository;
+    private final LoansRepository loansRepository;
+    private final LoanServiceConfig loanServiceConfig;
 
     @PostMapping("/loans")
     public List<Loans> getLoansDetails(@RequestBody Customer customer) {
-        List<Loans> loans = loansRepository.findByCustomerIdOrderByStartDtDesc(customer.getCustomerId());
-        if (loans != null) {
-            return loans;
-        } else {
-            return null;
-        }
+        return loansRepository.findByCustomerIdOrderByStartDtDesc(customer.getCustomerId());
+    }
 
+    @GetMapping("/loans/properties")
+    public String getPropertiesDetails() throws JsonProcessingException {
+        ObjectWriter objectWriter = new ObjectMapper().writer().withDefaultPrettyPrinter();
+        Properties properties = new Properties(loanServiceConfig.getMsg(),
+                loanServiceConfig.getBuildVersion(),
+                loanServiceConfig.getMailDetails(),
+                loanServiceConfig.getActiveBranches());
+        return objectWriter.writeValueAsString(properties);
     }
 
 }

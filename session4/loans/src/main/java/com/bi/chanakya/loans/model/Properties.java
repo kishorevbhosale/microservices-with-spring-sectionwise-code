@@ -1,4 +1,4 @@
-package com.bi.chanakya.accounts.model;
+package com.bi.chanakya.loans.model;
 
 
 import lombok.AllArgsConstructor;
@@ -11,6 +11,7 @@ import java.util.Map;
 
 @Getter
 @Setter
+@RequiredArgsConstructor
 @AllArgsConstructor
 public class Properties {
 
