@@ -39,6 +39,8 @@ the path 'configserver\src\main\resources'
   
 
 - Actuator url : http://localhost:8080/actuator
+- Encrypt data (post call) : http://localhost:8071/encrypt (pass text for encryption in body section)
+- Decrypt data (post call) : http://localhost:8071/decrypt (pass text for decryption in body section)
 
 **Docker commands for reference:**
 
