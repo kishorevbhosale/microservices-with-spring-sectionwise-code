@@ -21,3 +21,15 @@ are the key steps that are followed while creating these projects.
 the path 'configserver\src\main\resources' 
 - Go to your Spring Boot main class ConfigserverApplication.java and right click-> Run As -> Java Application. This will start your Spring Boot application successfully at port 8071 which is the port we configured inside application.properties. Your can confirm the same by looking at the console logs.
 - Access the URLs like http://localhost:8071/accounts/default, http://localhost:8071/loans/dev, http://localhost:8071/cards/prod inside your browser to randomly validate that properties are being read from configured file system by Config Server for all the three microservices accounts, loans and cards.
+
+
+**Docker commands for reference:**
+
+- $ `docker build . -t <user_name_of_docker_hub/image-name>` (eg. kishorevbhosale/accounts)
+- $ `mvn spring-boot:build-image` - (run in respective dir to create docker image)
+- $ `docker images` - list all docker images
+- $ `docker rmi <image-id prefix>` - remove the docker image
+- $ `docker push <image-name>` - push image in docker hub
+- $ `docker ps` - check all running container
+- $ `docker compose up` - go to docker-compose and soecific env folder and run this
+- $ `docker stop <container-id-prefix>` - stop the running containers

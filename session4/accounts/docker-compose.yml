@@ -7,7 +7,7 @@ services:
     ports:
       - "8080:8080"
     networks:
-      - kishorevbhosale-network
+      - sknetwork
 
   cards:
     image: kishorevbhosale/cards:latest
@@ -15,7 +15,7 @@ services:
     ports:
       - "9000:9000"
     networks:
-      - kishorevbhosale-network
+      - sknetwork
 
   loans:
     image: kishorevbhosale/loans:latest
@@ -23,7 +23,7 @@ services:
     ports:
       - "8090:8090"
     networks:
-      - kishorevbhosale-network
+      - sknetwork
 
 networks:
-  kishorevbhosale-network:
+  sknetwork:
