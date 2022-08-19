@@ -65,6 +65,14 @@ Access the EUREKA URLs
 - http://192.168.0.4:8070/eureka/apps/cards
 - http://192.168.0.4:8070/eureka/apps/loans
 
+Shutdown the applications:
+- http://localhost:8080/actuator/shutdown (postman - post method)
+- http://localhost:8090/actuator/shutdown (postman - post method)
+- http://localhost:9000/actuator/shutdown (postman - post method)
+
+check eureka dashbord all services are de-registered
+
+
 **Docker commands for reference:**
 
 - $ `docker build . -t <user_name_of_docker_hub/image-name>` (eg. kishorevbhosale/accounts)
