@@ -72,6 +72,24 @@ Shutdown the applications:
 
 check eureka dashbord all services are de-registered
 
+**Client side load balancing :**
+
+In order to set up Client side load balancing using Feign client, 
+add @EnableFeignClients annotation on top of AccountsApplication.java class which is present inside accounts microservice.
+
+create two interfaces with the name `LoansFeignClient.java,CardsFeignClient.java` inside accounts microservice project. 
+These two interfaces and the methods inside them will help to communicate with loans and cards microservices 
+using Feign client from accounts microservice.
+
+
+Restart the accounts microservice and test the feign client changes done by invoking 
+the endpoint http://localhost:8080/customerdetails through Postman 
+by passing the below request in JSON format. 
+You should get the response from the accounts microservices which has all the details related to account, loans and cards.
+
+`{
+"customerId": 1
+}`
 
 **Docker commands for reference:**
 
