@@ -16,10 +16,10 @@ are the key steps that are followed while creating these projects.
   steps mentioned in the course
 
 
-- Access the URLs like
-  - http://localhost:8080/accounts/ 
-  - http://localhost:8090/loans/
-  - http://localhost:9000/cards/
+Access the URLs like
+- http://localhost:8080/accounts/ 
+- http://localhost:8090/loans/
+- http://localhost:9000/cards/
   
 
 - A new microservices 'configserver' is created based on Spring Cloud Config which will act as a Config server. 
@@ -30,17 +30,40 @@ the path 'configserver\src\main\resources'
 - Go to your Spring Boot main class ConfigserverApplication.java and right click-> Run As -> Java Application. This will start your Spring Boot application successfully at port 8071 which is the port we configured inside application.properties. Your can confirm the same by looking at the console logs.
 
 
-- Access the URLs like 
-  - http://localhost:8071/accounts/default, (default/dev/prod)
-  - http://localhost:8071/loans/dev, (default/dev/prod)
-  - http://localhost:8071/cards/prod  (default/dev/prod)
+Access the URLs like 
+- http://localhost:8071/accounts/default, (default/dev/prod)
+- http://localhost:8071/loans/dev, (default/dev/prod)
+- http://localhost:8071/cards/prod  (default/dev/prod)
   
-  inside your browser to randomly validate that properties are being read from configured file system by Config Server for all the three microservices accounts, loans and cards.
+Inside your browser to randomly validate that properties are being read from configured file system by Config Server for all the three microservices accounts, loans and cards.
   
 
 - Actuator url : http://localhost:8080/actuator
 - Encrypt data (post call) : http://localhost:8071/encrypt (pass text for encryption in body section)
 - Decrypt data (post call) : http://localhost:8071/decrypt (pass text for decryption in body section)
+
+**Eurekaserver :**
+
+A new microservices 'eurekaserver' is created in this section based on Spring Cloud Netflix Eureka which will act as a Service Discovery & Registration server. 
+All the existing microservices accounts, loans, cards are updated to register themselves with the eurekaserver during the startup and send heartbeat signals. 
+Accounts microservice is also updated to connect with loans and cards microservices using Netflix Feign client.
+
+Open the SpringBoot main class EurekaserverApplication.java . 
+We can always identify the main class in a Spring Boot project by looking for the annotation @SpringBootApplication. 
+On top of this main class, please add annotation '@EnableEurekaServer'. This annotation will make your microservice to act as a Spring Cloud Netflix Eureka Server.
+
+if you are using a Spring Boot version of >=2.5 then providing ribbon configurations is not required.
+
+Sequence of execution :
+- start configserver application
+- start eurekaserver
+- start any aaplication (accounts/cards/loans)
+
+Access the EUREKA URLs
+- http://192.168.0.4:8070/eureka/
+- http://192.168.0.4:8070/eureka/apps/accounts
+- http://192.168.0.4:8070/eureka/apps/cards
+- http://192.168.0.4:8070/eureka/apps/loans
 
 **Docker commands for reference:**
 
