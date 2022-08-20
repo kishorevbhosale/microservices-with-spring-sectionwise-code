@@ -99,6 +99,11 @@ You should get the response from the accounts microservices which has all the de
 - http://localhost:8071/loans/dev - (check any service - account/cards/loans and any env - default/dev/prod)
 - post call of http://localhost:8080/customerdetails - check finclients working fine
 
+**Check multiple instances of accounts that are created**
+- post call to http://localhost:8080/customerdetails
+- post call to http://localhost:8081/customerdetails
+- http://localhost:8070/eureka/apps/accounts - check the eureka details for instances of accounts
+
 **Docker commands for reference:**
 
 - $ `docker build . -t <user_name_of_docker_hub/image-name>` (eg. kishorevbhosale/accounts)
