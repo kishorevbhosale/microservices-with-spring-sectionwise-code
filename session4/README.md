@@ -91,6 +91,14 @@ You should get the response from the accounts microservices which has all the de
 "customerId": 1
 }`
 
+**Start all microservices using docker compose file :**
+
+- go to `docker-compose`  dir and run the command `docker compose up`
+- verify using following links:
+- http://localhost:8070/
+- http://localhost:8071/loans/dev - (check any service - account/cards/loans and any env - default/dev/prod)
+- post call of http://localhost:8080/customerdetails - check finclients working fine
+
 **Docker commands for reference:**
 
 - $ `docker build . -t <user_name_of_docker_hub/image-name>` (eg. kishorevbhosale/accounts)

@@ -19,3 +19,9 @@ session4/loans/mvnw.cmd
 session4/loans/.gitignore
 session4/loans/target
 
+session4/eurekaserver/.mvn
+session4/eurekaserver/mvnw
+session4/eurekaserver/mvnw.cmd
+session4/eurekaserver/.gitignore
+session4/eurekaserver/target
+
