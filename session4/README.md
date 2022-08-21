@@ -104,6 +104,16 @@ You should get the response from the accounts microservices which has all the de
 - post call to http://localhost:8081/customerdetails
 - http://localhost:8070/eureka/apps/accounts - check the eureka details for instances of accounts
 
+**CircuitBreaker Pattern**
+
+Key Steps : 
+- Added Resilience4j related dependencies to pom.xml of account microservice
+- Updated application.properties file of account microservice
+- Added `@CircuitBreaker` annotation to related method and handled empty response. (updated `AccountsController`)
+- GET call : http://localhost:8080/actuator/circuitbreakers
+- GET call : http://localhost:8080/actuator/circuitbreakerevents/?name=detailsForCustomerSupportApp
+- POST call to check customer details with circuitbreakers pattern http://localhost:8080/customerdetails
+
 **Docker commands for reference:**
 
 - $ `docker build . -t <user_name_of_docker_hub/image-name>` (eg. kishorevbhosale/accounts)
