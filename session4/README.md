@@ -114,6 +114,18 @@ Key Steps :
 - GET call : http://localhost:8080/actuator/circuitbreakerevents/?name=detailsForCustomerSupportApp
 - POST call to check customer details with circuitbreakers pattern http://localhost:8080/customerdetails
 
+
+**Retry Pattern**
+
+Key Steps :
+- Added Resilience4j related dependencies to pom.xml of account microservice
+- Updated application.properties file of account microservice
+- Added `@Retry` annotation to related method and handled empty response. (updated `AccountsController`)
+- GET call : http://localhost:8080/actuator/retries
+- GET call : http://localhost:8080/actuator/retryevents
+- POST call to check customer details with retries pattern http://localhost:8080/customerdetails
+
+
 **Docker commands for reference:**
 
 - $ `docker build . -t <user_name_of_docker_hub/image-name>` (eg. kishorevbhosale/accounts)

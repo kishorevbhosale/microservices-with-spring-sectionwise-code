@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 @AllArgsConstructor
 public class LoansController {
@@ -27,6 +29,7 @@ public class LoansController {
 
     @PostMapping("/loans")
     public List<Loans> getLoansDetails(@RequestBody Customer customer) {
+        log.info("Invoking loan service");
         return loansRepository.findByCustomerIdOrderByStartDtDesc(customer.getCustomerId());
     }
 
