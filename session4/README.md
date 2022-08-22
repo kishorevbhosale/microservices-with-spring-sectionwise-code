@@ -126,6 +126,16 @@ Key Steps :
 - POST call to check customer details with retries pattern http://localhost:8080/customerdetails
 
 
+**RateLimiter Pattern**
+
+Key Steps :
+- Added Resilience4j related dependencies to pom.xml of account microservice
+- Updated application.properties file of account microservice
+- Added `@RateLimiter` annotation to related method and handled empty response. (updated `AccountsController`)
+- GET call : http://localhost:8080/actuator/ratelimiters
+- GET call to check customer details with retries pattern http://localhost:8080/sayHello
+
+
 **Docker commands for reference:**
 
 - $ `docker build . -t <user_name_of_docker_hub/image-name>` (eg. kishorevbhosale/accounts)
