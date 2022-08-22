@@ -104,6 +104,8 @@ You should get the response from the accounts microservices which has all the de
 - post call to http://localhost:8081/customerdetails
 - http://localhost:8070/eureka/apps/accounts - check the eureka details for instances of accounts
 
+Making Microservices Resilient
+---
 **CircuitBreaker Pattern**
 
 Key Steps : 
@@ -135,6 +137,15 @@ Key Steps :
 - GET call : http://localhost:8080/actuator/ratelimiters
 - GET call to check customer details with retries pattern http://localhost:8080/sayHello
 
+Spring Cloud Gateway
+--- 
+- A new microservices `gatewayserver` is created in this section based on Spring Cloud Gateway which will help 
+  in handling routing & any other cross cutting concerns inside microservices network.
+- Update the application.properties in `gatewayserver` service
+- Major dependecy added is `spring-cloud-starter-gateway`
+- GET call : http://host.docker.internal:8072/actuator
+- GET call : http://host.docker.internal:8072/actuator/gateway/routes
+- POST call for account detail : http://host.docker.internal:8072/accounts/account/details
 
 **Docker commands for reference:**
 
