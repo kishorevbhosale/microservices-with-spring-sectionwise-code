@@ -147,7 +147,21 @@ Spring Cloud Gateway
 - GET call : http://host.docker.internal:8072/actuator/gateway/routes
 - POST call for account detail : http://host.docker.internal:8072/accounts/account/details
 
-**Docker commands for reference:**
+**cross cutting concept :**
+
+- Tracing every request (correlationId)
+- In order to implement cross cutting concerns inside your microservices created the classes TraceFilter.java, 
+ResponseTraceFilter.java, FilterUtility.java.
+- updated all the important classes like AccountsController.java, LoansController.java, CardsController.java 
+to accept the @RequestHeader("skbank-correlation-id") String correlationid as input inside the method parameters.
+- Restart your gatewayserver microservice and invoke the REST API http://localhost:8072/skbank/accounts/myCusomerDetails 
+through Postman by passing the below request in JSON format.
+- Validate the logger statements of gatewayserver microservice to check if the skbank-correlation-id value is logged properly or not.
+
+
+Docker Commands 
+---
+  **Docker commands for reference:**
 
 - $ `docker build . -t <user_name_of_docker_hub/image-name>` (eg. kishorevbhosale/accounts)
 - $ `mvn spring-boot:build-image` - (run in respective dir to create docker image)
