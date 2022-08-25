@@ -196,9 +196,30 @@ Hibernate: select cards0_.card_id as card_id1_0_, cards0_.amount_used as amount_
 2022-08-25 10:05:11.648  INFO [loans,d3468216e7433f8e,4956ae6ad2a25d8b] 37044 --- [nio-8090-exec-1] c.b.c.loans.controller.LoansController   : getLoansDetails() method started
 Hibernate: select loans0_.loan_number as loan_num1_0_, loans0_.amount_paid as amount_p2_0_, loans0_.create_dt as create_d3_0_, loans0_.customer_id as customer4_0_, loans0_.loan_type as loan_typ5_0_, loans0_.outstanding_amount as outstand6_0_, loans0_.start_dt as start_dt7_0_, loans0_.total_loan as total_lo8_0_ from loans loans0_ where loans0_.customer_id=? order by loans0_.start_dt desc
 2022-08-25 10:05:11.954  INFO [loans,d3468216e7433f8e,4956ae6ad2a25d8b] 37044 --- [nio-8090-exec-1] c.b.c.loans.controller.LoansController   : getLoansDetails() method ended
-
 ```
-Docker Commands 
+**Zipkin details :**
+- Now in order to use distributed tracing using Zipkin, run the docker command `docker run -d -p 9411:9411 openzipkin/zipkin`. 
+- This docker command will start the zipkin docker container using the provided docker image. 
+- To validate if the zipkin server started successfully or not, visit the URL http://localhost:9411/zipkin inside your browser. You should be able to see the zipkin home page.
+- Open the pom.xml of all the microservices accounts, loans, cards, configserver, eurekaserver, gatewayserver and make sure to add the below required dependency of Zipkin in all of them.
+```aidl
+<dependency>
+  <groupId>org.springframework.cloud</groupId>
+  <artifactId>spring-cloud-sleuth-zipkin</artifactId>
+ </dependency>
+```
+- Open the application.properties of all the microservices accounts, loans, cards, configserver, eurekaserver, gatewayserver and make sure to add the below properties/configurations in all of them.
+```
+spring.sleuth.sampler.percentage=1
+spring.zipkin.baseUrl=http://localhost:9411/
+```
+- Start all the microservices in the order of configserver, eurekaserver, accounts, loans, cards, gatewayserver.
+- Once all the microservices are started, access the URL http://localhost:8072/accounts/myCusomerDetails through Postman
+  Docker Commands 
+- You should be able to see the tracing details inside zipkin console
+
+
+
 ---
   **Docker commands for reference:**
 

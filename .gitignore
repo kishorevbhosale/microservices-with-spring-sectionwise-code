@@ -6,22 +6,32 @@ session4/accounts/mvnw
 session4/accounts/mvnw.cmd
 session4/accounts/.gitignore
 session4/accounts/target
+session4/accounts/accounts.iml
 
 session4/cards/.mvn
 session4/cards/mvnw
 session4/cards/mvnw.cmd
 session4/cards/.gitignore
 session4/cards/target
+session4/cards/cards.iml
 
 session4/loans/.mvn
 session4/loans/mvnw
 session4/loans/mvnw.cmd
 session4/loans/.gitignore
 session4/loans/target
+session4/loans/loans.iml
 
 session4/eurekaserver/.mvn
 session4/eurekaserver/mvnw
 session4/eurekaserver/mvnw.cmd
 session4/eurekaserver/.gitignore
 session4/eurekaserver/target
+session4/eurekaserver/eurekaserver.iml
+
+session4/configserver/configserver.iml
+session4/configserver/target
+
+session4/gatewayserver/gatewayserver.iml
+session4/gatewayserver/target
 
