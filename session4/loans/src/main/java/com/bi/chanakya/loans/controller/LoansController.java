@@ -25,9 +25,12 @@ public class LoansController {
     private final LoanServiceConfig loanServiceConfig;
 
     @PostMapping("/loans")
-    public List<Loans> getLoansDetails(@RequestHeader("skbank-correlation-id") String correlationid, @RequestBody Customer customer) {
-        log.info("Invoking loan service");
-        return loansRepository.findByCustomerIdOrderByStartDtDesc(customer.getCustomerId());
+    public List<Loans> getLoansDetails(@RequestHeader("skbank-correlation-id") String correlationid,@RequestBody Customer customer) {
+        log.info("getLoansDetails() method started");
+        List<Loans> loans = loansRepository.findByCustomerIdOrderByStartDtDesc(customer.getCustomerId());
+        log.info("getLoansDetails() method ended");
+        return loans;
+
     }
 
     @GetMapping("/loans/properties")

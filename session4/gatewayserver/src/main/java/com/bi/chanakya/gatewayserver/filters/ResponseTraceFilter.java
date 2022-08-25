@@ -1,6 +1,5 @@
 package com.bi.chanakya.gatewayserver.filters;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
@@ -11,10 +10,10 @@ import reactor.core.publisher.Mono;
 
 @Slf4j
 @Configuration
-@RequiredArgsConstructor
 public class ResponseTraceFilter {
 
-    private final FilterUtility filterUtility;
+    @Autowired
+    FilterUtility filterUtility;
 
     @Bean
     public GlobalFilter postGlobalFilter() {

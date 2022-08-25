@@ -158,7 +158,46 @@ to accept the @RequestHeader("skbank-correlation-id") String correlationid as in
 through Postman by passing the below request in JSON format.
 - Validate the logger statements of gatewayserver microservice to check if the skbank-correlation-id value is logged properly or not.
 
+Distributed tracing and log aggregation
+---
 
+**Using Sleuth and zipkin**
+
+- Added dependency in all pom.xml
+- Added logs in respective microservice
+- logs from gatewayserver
+```aidl
+2022-08-25 10:05:09.804  INFO [gatewayserver,d3468216e7433f8e,d3468216e7433f8e] 40952 --- [ctor-http-nio-7] c.b.c.g.filters.RequestTraceFilter       : skbank-correlation-id generated in tracing filter: c8d55cd8-c7f7-44a3-a743-4a59829d73e3.
+```
+
+- logs from accoutn service
+```aidl
+2022-08-25 10:05:10.386  INFO [accounts,d3468216e7433f8e,86e64e87cb365830] 29180 --- [io-8080-exec-10] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-08-25 10:05:10.387  INFO [accounts,d3468216e7433f8e,86e64e87cb365830] 29180 --- [io-8080-exec-10] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-08-25 10:05:10.393  INFO [accounts,d3468216e7433f8e,86e64e87cb365830] 29180 --- [io-8080-exec-10] o.s.web.servlet.DispatcherServlet        : Completed initialization in 6 ms
+2022-08-25 10:05:10.622  INFO [accounts,d3468216e7433f8e,86e64e87cb365830] 29180 --- [io-8080-exec-10] c.b.c.a.controller.AccountsController    : myCustomerDetails() method started
+Hibernate: select accounts0_.account_number as account_1_0_, accounts0_.account_type as account_2_0_, accounts0_.branch_address as branch_a3_0_, accounts0_.create_dt as create_d4_0_, accounts0_.customer_id as customer5_0_ from accounts accounts0_ where accounts0_.customer_id=?
+2022-08-25 10:05:13.073  INFO [accounts,d3468216e7433f8e,86e64e87cb365830] 29180 --- [io-8080-exec-10] c.b.c.a.controller.AccountsController    : myCustomerDetails() method ended
+```
+- logs from cards service
+```aidl
+2022-08-25 10:05:12.396  INFO [cards,d3468216e7433f8e,7c831aa86c378198] 39828 --- [nio-9000-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-08-25 10:05:12.396  INFO [cards,d3468216e7433f8e,7c831aa86c378198] 39828 --- [nio-9000-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-08-25 10:05:12.403  INFO [cards,d3468216e7433f8e,7c831aa86c378198] 39828 --- [nio-9000-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 7 ms
+2022-08-25 10:05:12.617  INFO [cards,d3468216e7433f8e,7c831aa86c378198] 39828 --- [nio-9000-exec-1] c.b.c.cards.controller.CardsController   : getCardDetails() method started
+Hibernate: select cards0_.card_id as card_id1_0_, cards0_.amount_used as amount_u2_0_, cards0_.available_amount as availabl3_0_, cards0_.card_number as card_num4_0_, cards0_.card_type as card_typ5_0_, cards0_.create_dt as create_d6_0_, cards0_.customer_id as customer7_0_, cards0_.total_limit as total_li8_0_ from cards cards0_ where cards0_.customer_id=?
+2022-08-25 10:05:13.044  INFO [cards,d3468216e7433f8e,7c831aa86c378198] 39828 --- [nio-9000-exec-1] c.b.c.cards.controller.CardsController   : getCardDetails() method ended
+```
+- logs from loan service
+```aidl
+2022-08-25 10:05:11.538  INFO [loans,d3468216e7433f8e,4956ae6ad2a25d8b] 37044 --- [nio-8090-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-08-25 10:05:11.538  INFO [loans,d3468216e7433f8e,4956ae6ad2a25d8b] 37044 --- [nio-8090-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-08-25 10:05:11.541  INFO [loans,d3468216e7433f8e,4956ae6ad2a25d8b] 37044 --- [nio-8090-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2022-08-25 10:05:11.648  INFO [loans,d3468216e7433f8e,4956ae6ad2a25d8b] 37044 --- [nio-8090-exec-1] c.b.c.loans.controller.LoansController   : getLoansDetails() method started
+Hibernate: select loans0_.loan_number as loan_num1_0_, loans0_.amount_paid as amount_p2_0_, loans0_.create_dt as create_d3_0_, loans0_.customer_id as customer4_0_, loans0_.loan_type as loan_typ5_0_, loans0_.outstanding_amount as outstand6_0_, loans0_.start_dt as start_dt7_0_, loans0_.total_loan as total_lo8_0_ from loans loans0_ where loans0_.customer_id=? order by loans0_.start_dt desc
+2022-08-25 10:05:11.954  INFO [loans,d3468216e7433f8e,4956ae6ad2a25d8b] 37044 --- [nio-8090-exec-1] c.b.c.loans.controller.LoansController   : getLoansDetails() method ended
+
+```
 Docker Commands 
 ---
   **Docker commands for reference:**
