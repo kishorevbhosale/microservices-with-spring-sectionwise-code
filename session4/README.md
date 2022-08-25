@@ -218,8 +218,28 @@ spring.zipkin.baseUrl=http://localhost:9411/
   Docker Commands 
 - You should be able to see the tracing details inside zipkin console
 
-
-
+**Rabbit MQ :**
+- Now in order to push all the loggers into Rabbit MQ asynchronously, open the pom.xml of 
+all the microservices accounts, loans, cards, configserver, eurekaserver, gatewayserver and make sure to add the below required dependency of Rabbit MQ in all of them.
+```aidl
+ <dependency>	
+  <groupId>org.springframework.amqp</groupId>
+  <artifactId>spring-rabbit</artifactId>
+ </dependency>
+```
+- Now in order to setup a Rabbit MQ server, run the docker command `docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3-management`. 
+- This docker command will start the Rabbit MQ related docker container using the provided docker image.
+  - To validate if the Rabbit MQ server started successfully or not, visit the URL http://localhost:15672 inside your browser and login with username/password as guest
+    Open the application.properties of all the microservices accounts, loans, cards, configserver, eurekaserver, gatewayserver and make sure to add the below 
+  properties/configurations
+```aidl
+spring.zipkin.sender.type=rabbit
+spring.zipkin.rabbitmq.queue=zipkin
+spring.rabbitmq.host=localhost
+spring.rabbitmq.port=5672
+spring.rabbitmq.username=guest
+spring.rabbitmq.password=guest
+```
 ---
   **Docker commands for reference:**
 
