@@ -11,7 +11,9 @@ import java.util.Map;
 
 @Configuration
 @ConfigurationProperties(prefix = "cards")
-@Getter @Setter @ToString
+@Getter
+@Setter
+@ToString
 public class CardsServiceConfig {
     private String msg;
     private String buildVersion;

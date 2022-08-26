@@ -9,9 +9,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,7 +22,7 @@ public class CardsController {
     private final CardsServiceConfig cardsServiceConfig;
 
     @PostMapping("/cards")
-    public List<Cards> getCardDetails(@RequestHeader("skbank-correlation-id") String correlationid,@RequestBody Customer customer) {
+    public List<Cards> getCardDetails(@RequestHeader("skbank-correlation-id") String correlationid, @RequestBody Customer customer) {
         log.info("getCardDetails() method started");
         List<Cards> cards = cardsRepository.findByCustomerId(customer.getCustomerId());
         log.info("getCardDetails() method ended");

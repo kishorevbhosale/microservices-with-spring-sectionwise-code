@@ -1,8 +1,7 @@
 package com.bi.chanakya.gatewayserver.filters;
 
-import org.springframework.stereotype.Component;
-
 import org.springframework.http.HttpHeaders;
+import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 
 import java.util.List;
@@ -11,8 +10,8 @@ import java.util.List;
 public class FilterUtility {
     public static final String CORRELATION_ID = "skbank-correlation-id";
 
-    public String getCorrelationId(HttpHeaders requestHeaders){
-        if (requestHeaders.get(CORRELATION_ID)!=null){
+    public String getCorrelationId(HttpHeaders requestHeaders) {
+        if (requestHeaders.get(CORRELATION_ID) != null) {
             List<String> requestHeaderList = requestHeaders.get(CORRELATION_ID);
             return requestHeaderList.stream().findFirst().get();
         } else {
