@@ -259,6 +259,26 @@ Monitoring Microservices Metrics & Health inside microservices network using Mic
 - prometheus details : http://localhost:8080/actuator/prometheus
 - prometheus UI : http://localhost:9090/targets
 
+  **Graphana :**
+```aidl
+grafana:
+    image: "grafana/grafana:latest"
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=password
+    networks:
+     - skbank
+    depends_on:
+      - prometheus 
+```
+- added above details in docker-compose.yml file present in `/accounts/docker-compose/monitor`
+- then run `docker-compose up` command
+- Open the URL http://localhost:3000/login/ inside a browser and enter the login details(admin/password) of Grafana
+- Inside Grafana provide prometheus details, build custom dashboards, alerts
+- Imported dashboard using template present at location - https://grafana.com/grafana/dashboards/15425-spring-boot-statistics/
+- 
 
   **Docker commands for reference:**
 
