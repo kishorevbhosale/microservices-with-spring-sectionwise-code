@@ -251,7 +251,15 @@ Monitoring Microservices Metrics & Health inside microservices network using Mic
 - Listed all metrics parameters : http://localhost:8080/actuator/metrics/
 - Check details of first field e.g. http://localhost:8080/actuator/metrics/application.ready.time
 - Prometheus URL :http://localhost:8080/actuator/prometheus to validate if the custom metric 'getAccountDetails.time' that we created is showing under metrics information.
----
+
+
+  **Prometheus Use :**
+- Added new dir `/monitoring` inside `/accounts/docker-compose` 
+- Added twi files `docker-compose.yml` and `prometheus.yml` file
+- prometheus details : http://localhost:8080/actuator/prometheus
+- prometheus UI : http://localhost:9090/targets
+
+
   **Docker commands for reference:**
 
 - $ `docker build . -t <user_name_of_docker_hub/image-name>` (eg. kishorevbhosale/accounts)
