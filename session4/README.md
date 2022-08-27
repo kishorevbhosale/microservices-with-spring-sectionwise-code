@@ -240,6 +240,17 @@ spring.rabbitmq.port=5672
 spring.rabbitmq.username=guest
 spring.rabbitmq.password=guest
 ```
+
+Monitoring Microservices Metrics & Health inside microservices network using Micrometer, Prometheus, Grafana
+---
+- Open the pom.xml of the microservices accounts, loans, cards and make sure to add the below required dependencies of micrometer,prometheus in all of them.
+- Open the AccountsApplication.java and create a bean of type TimedAspect inside it like we discussed in the course.
+- Open the AccountsController.java and create a custom metric for `/account/details` API with the help of annotation `@Timed`
+- Once all the required microservices are started, access the URL http://localhost:8080/account/details
+- check GET http://localhost:8080/actuator/
+- Listed all metrics parameters : http://localhost:8080/actuator/metrics/
+- Check details of first field e.g. http://localhost:8080/actuator/metrics/application.ready.time
+- Prometheus URL :http://localhost:8080/actuator/prometheus to validate if the custom metric 'getAccountDetails.time' that we created is showing under metrics information.
 ---
   **Docker commands for reference:**
 
