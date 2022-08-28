@@ -166,12 +166,12 @@ Distributed tracing and log aggregation
 - Added dependency in all pom.xml
 - Added logs in respective microservice
 - logs from gatewayserver
-```aidl
+```yaml
 2022-08-25 10:05:09.804  INFO [gatewayserver,d3468216e7433f8e,d3468216e7433f8e] 40952 --- [ctor-http-nio-7] c.b.c.g.filters.RequestTraceFilter       : skbank-correlation-id generated in tracing filter: c8d55cd8-c7f7-44a3-a743-4a59829d73e3.
 ```
 
 - logs from accoutn service
-```aidl
+```yaml
 2022-08-25 10:05:10.386  INFO [accounts,d3468216e7433f8e,86e64e87cb365830] 29180 --- [io-8080-exec-10] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
 2022-08-25 10:05:10.387  INFO [accounts,d3468216e7433f8e,86e64e87cb365830] 29180 --- [io-8080-exec-10] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 2022-08-25 10:05:10.393  INFO [accounts,d3468216e7433f8e,86e64e87cb365830] 29180 --- [io-8080-exec-10] o.s.web.servlet.DispatcherServlet        : Completed initialization in 6 ms
@@ -180,7 +180,7 @@ Hibernate: select accounts0_.account_number as account_1_0_, accounts0_.account_
 2022-08-25 10:05:13.073  INFO [accounts,d3468216e7433f8e,86e64e87cb365830] 29180 --- [io-8080-exec-10] c.b.c.a.controller.AccountsController    : myCustomerDetails() method ended
 ```
 - logs from cards service
-```aidl
+```yaml
 2022-08-25 10:05:12.396  INFO [cards,d3468216e7433f8e,7c831aa86c378198] 39828 --- [nio-9000-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
 2022-08-25 10:05:12.396  INFO [cards,d3468216e7433f8e,7c831aa86c378198] 39828 --- [nio-9000-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 2022-08-25 10:05:12.403  INFO [cards,d3468216e7433f8e,7c831aa86c378198] 39828 --- [nio-9000-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 7 ms
@@ -189,7 +189,7 @@ Hibernate: select cards0_.card_id as card_id1_0_, cards0_.amount_used as amount_
 2022-08-25 10:05:13.044  INFO [cards,d3468216e7433f8e,7c831aa86c378198] 39828 --- [nio-9000-exec-1] c.b.c.cards.controller.CardsController   : getCardDetails() method ended
 ```
 - logs from loan service
-```aidl
+```yaml
 2022-08-25 10:05:11.538  INFO [loans,d3468216e7433f8e,4956ae6ad2a25d8b] 37044 --- [nio-8090-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
 2022-08-25 10:05:11.538  INFO [loans,d3468216e7433f8e,4956ae6ad2a25d8b] 37044 --- [nio-8090-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 2022-08-25 10:05:11.541  INFO [loans,d3468216e7433f8e,4956ae6ad2a25d8b] 37044 --- [nio-8090-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
@@ -202,7 +202,7 @@ Hibernate: select loans0_.loan_number as loan_num1_0_, loans0_.amount_paid as am
 - This docker command will start the zipkin docker container using the provided docker image. 
 - To validate if the zipkin server started successfully or not, visit the URL http://localhost:9411/zipkin inside your browser. You should be able to see the zipkin home page.
 - Open the pom.xml of all the microservices accounts, loans, cards, configserver, eurekaserver, gatewayserver and make sure to add the below required dependency of Zipkin in all of them.
-```aidl
+```yaml
 <dependency>
   <groupId>org.springframework.cloud</groupId>
   <artifactId>spring-cloud-sleuth-zipkin</artifactId>
@@ -221,7 +221,7 @@ spring.zipkin.baseUrl=http://localhost:9411/
 **Rabbit MQ :**
 - Now in order to push all the loggers into Rabbit MQ asynchronously, open the pom.xml of 
 all the microservices accounts, loans, cards, configserver, eurekaserver, gatewayserver and make sure to add the below required dependency of Rabbit MQ in all of them.
-```aidl
+```yaml
  <dependency>	
   <groupId>org.springframework.amqp</groupId>
   <artifactId>spring-rabbit</artifactId>
@@ -232,7 +232,7 @@ all the microservices accounts, loans, cards, configserver, eurekaserver, gatewa
   - To validate if the Rabbit MQ server started successfully or not, visit the URL http://localhost:15672 inside your browser and login with username/password as guest
     Open the application.properties of all the microservices accounts, loans, cards, configserver, eurekaserver, gatewayserver and make sure to add the below 
   properties/configurations
-```aidl
+```yaml
 spring.zipkin.sender.type=rabbit
 spring.zipkin.rabbitmq.queue=zipkin
 spring.rabbitmq.host=localhost
@@ -260,7 +260,7 @@ Monitoring Microservices Metrics & Health inside microservices network using Mic
 - prometheus UI : http://localhost:9090/targets
 
   **Graphana :**
-```aidl
+```yaml
 grafana:
     image: "grafana/grafana:latest"
     ports:
