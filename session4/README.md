@@ -278,7 +278,18 @@ grafana:
 - Open the URL http://localhost:3000/login/ inside a browser and enter the login details(admin/password) of Grafana
 - Inside Grafana provide prometheus details, build custom dashboards, alerts
 - Imported dashboard using template present at location - https://grafana.com/grafana/dashboards/15425-spring-boot-statistics/
--
+
+Automatic self-healing, scaling, deployments inside microservices network using Kubernetes
+---
+
+- we have added application `.yml` files in `kubernetes` folder under `account` service
+- Created default cluster in `GCP`
+- Connected from local terminal and run following commands
+- First we run `kubectl apply -f 1_configmaps.yml` to create ConfigMaps inside Kubernetes cluster.
+- The same can be validated by running the command kubectl get configmap
+- Run the commands `kubectl apply -f 2_zipkin.yml`, `kubectl apply -f 3_configserver.yml`, `kubectl apply -f 4_eurekaserver.yml`, `kubectl apply -f 5_accounts.yml` 
+to deploy the applicable microservices into kubernetes cluster. 
+- The same can be validated by running the commands `kubectl get pods`, `kubectl get deployments`, `kubectl get services`, `kubectl get replicaset`.
 
 ## Maven Commands 
 
@@ -314,6 +325,36 @@ grafana:
 | "docker container prune" | To remove all stopped containers |
 | "docker compose up" | To create and start containers based on given docker compose file |
 | "docker compose stop" | To stop services |
+
+## Kubernetes Commands used in the course
+
+|     Kubernetes Command       |     Description          |
+| ------------- | ------------- |
+| "kubectl apply -f filename" | To create a deployment/service/configmap based on a given YAML file |
+| "kubectl get all" | To get all the components inside your cluster |
+| "kubectl get pods" | To get all the pods details inside your cluster |
+| "kubectl get pod pod-id" | To get the details of a given pod id |
+| "kubectl describe pod pod-id" | To get more details of a given pod id |
+| "kubectl delete pod pod-id" | To delete a given pod from cluster |
+| "kubectl get services" | To get all the services details inside your cluster |
+| "kubectl get service service-id" | To get the details of a given service id |
+| "kubectl describe service service-id" | To get more details of a given service id |
+| "kubectl get nodes" | To get all the node details inside your cluster |
+| "kubectl get node node-id" | To get the details of a given node |
+| "kubectl get replicasets" | To get all the replica sets details inside your cluster |
+| "kubectl get replicaset replicaset-id" | To get the details of a given replicaset |
+| "kubectl get deployments" | To get all the deployments details inside your cluster |
+| "kubectl get deployment deployment-id" | To get the details of a given deployment |
+| "kubectl get configmaps" | To get all the configmap details inside your cluster |
+| "kubectl get configmap configmap-id" | To get the details of a given configmap |
+| "kubectl get events --sort-by=.metadata.creationTimestamp" | To get all the events occured inside your cluster |
+| "kubectl scale deployment accounts-deployment --replicas=3" | To increase the number of replicas for a deployment inside your cluster |
+| "kubectl set image deployment accounts-deployment accounts=eazybytes/accounts:k8s" | To set a new image for a deployment inside your cluster |
+| "kubectl rollout history deployment accounts-deployment" | To know the rollout history for a deployment inside your cluster |
+| "kubectl rollout undo deployment accounts-deployment --to-revision=1" | To rollback to a given revision for a deployment inside your cluster |
+| "kubectl autoscale deployment accounts-deployment --min=3 --max=10 --cpu-percent=70" | To create automatic scaling using HPA for a deployment inside your cluster |
+| "kubectl logs node-id" | To get a logs of a given node inside your cluster |
+
 
 # Important Links
 - Spring Cloud Project - https://spring.io/projects/spring-cloud

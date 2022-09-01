@@ -1,24 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: accounts-deployment
+  name: cards-deployment
   labels:
-    app: accounts
+    app: cards
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: accounts
+      app: cards
   template:
     metadata:
       labels:
-        app: accounts
+        app: cards
     spec:
       containers:
-        - name: accounts
-          image: kishorevbhosale/accounts:latest
+        - name: cards
+          image: kishorevbhosale/cards:latest
           ports:
-            - containerPort: 8080
+            - containerPort: 9000
           env:
             - name: SPRING_PROFILES_ACTIVE
               valueFrom:
@@ -44,12 +44,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: accounts-service
+  name: cards-service
 spec:
   selector:
-    app: accounts
+    app: cards
   type: LoadBalancer
   ports:
     - protocol: TCP
-      port: 8080
-      targetPort: 8080
+      port: 9000
+      targetPort: 9000

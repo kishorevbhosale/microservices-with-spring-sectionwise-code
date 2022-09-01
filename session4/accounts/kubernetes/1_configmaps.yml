@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: skbank1-configmap
+  name: skbank-configmap
 data:
   SPRING_ZIPKIN_BASEURL: http://zipkin-service:9411/
   SPRING_PROFILES_ACTIVE: dev
