@@ -2,14 +2,14 @@
 apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
-  name: {{ include "skbank-common.fullname" . }}
+  name: {{ include "skbank-test.fullname" . }}
   labels:
-    {{- include "skbank-common.labels" . | nindent 4 }}
+    {{- include "skbank-test.labels" . | nindent 4 }}
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: {{ include "skbank-common.fullname" . }}
+    name: {{ include "skbank-test.fullname" . }}
   minReplicas: {{ .Values.autoscaling.minReplicas }}
   maxReplicas: {{ .Values.autoscaling.maxReplicas }}
   metrics:

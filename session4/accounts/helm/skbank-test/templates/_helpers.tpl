@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "skbank-common.name" -}}
+{{- define "skbank-test.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -10,7 +10,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "skbank-common.fullname" -}}
+{{- define "skbank-test.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -26,16 +26,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "skbank-common.chart" -}}
+{{- define "skbank-test.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "skbank-common.labels" -}}
-helm.sh/chart: {{ include "skbank-common.chart" . }}
-{{ include "skbank-common.selectorLabels" . }}
+{{- define "skbank-test.labels" -}}
+helm.sh/chart: {{ include "skbank-test.chart" . }}
+{{ include "skbank-test.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -45,17 +45,17 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "skbank-common.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "skbank-common.name" . }}
+{{- define "skbank-test.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "skbank-test.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "skbank-common.serviceAccountName" -}}
+{{- define "skbank-test.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "skbank-common.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "skbank-test.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
