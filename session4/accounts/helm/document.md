@@ -65,3 +65,32 @@ For that go to dir of respective service and edit the `replicaCount` value from 
 update this dependencies -> go to `dev-env` and run `> helm dependency build`  sim for `prod-env`
 3) From `environment` dir run the command `> helm upgrade dev-deployment dev-env`
 4) Check the pod count its changed from 1 to 2 in GCP
+
+
+**Helm History :**
+```aidl
+> helm history dev-deployment
+W0905 22:29:51.252319   20248 gcp.go:120] WARNING: the gcp auth plugin is deprecated in v1.22+, unavailable in v1.25+; use gcloud instead.
+To learn more, consult https://cloud.google.com/blog/products/containers-kubernetes/kubectl-auth-changes-in-gke
+REVISION        UPDATED                         STATUS          CHART           APP VERSION     DESCRIPTION
+1               Mon Sep  5 21:56:26 2022        superseded      dev-env-0.1.0   1.16.0          Install complete
+2               Mon Sep  5 22:26:22 2022        deployed        dev-env-0.1.0   1.16.0          Upgrade complete
+```
+
+**Helm Rollback :**
+```aidl
+>helm rollback dev-deployment 1
+W0905 22:32:30.361609   10932 gcp.go:120] WARNING: the gcp auth plugin is deprecated in v1.22+, unavailable in v1.25+; use gcloud instead.
+To learn more, consult https://cloud.google.com/blog/products/containers-kubernetes/kubectl-auth-changes-in-gke
+Rollback was a success! Happy Helming!
+```
+**Check history after rollback :**
+```aidl
+> helm history dev-deployment
+W0905 22:33:30.432641   12832 gcp.go:120] WARNING: the gcp auth plugin is deprecated in v1.22+, unavailable in v1.25+; use gcloud instead.
+To learn more, consult https://cloud.google.com/blog/products/containers-kubernetes/kubectl-auth-changes-in-gke
+REVISION        UPDATED                         STATUS          CHART           APP VERSION     DESCRIPTION
+1               Mon Sep  5 21:56:26 2022        superseded      dev-env-0.1.0   1.16.0          Install complete
+2               Mon Sep  5 22:26:22 2022        superseded      dev-env-0.1.0   1.16.0          Upgrade complete
+3               Mon Sep  5 22:32:31 2022        deployed        dev-env-0.1.0   1.16.0          Rollback to 1
+```
