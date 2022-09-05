@@ -57,3 +57,11 @@ TEST SUITE: None
 2) Check details in `Secrets and ConfigMaps` in GCP
 3) Check all services are running in `Services & Ingress` in GCP
 4) Check Endpoints for all services listed inside GCP
+
+**Upgrade the deployment :**
+1) update the instance of services(accounts, cards, loans) from 1 to 2.<br/>
+For that go to dir of respective service and edit the `replicaCount` value from `values.yml` file.
+2) All the dependency are added inside the `dev-env` and `prod-env`, <br/>
+update this dependencies -> go to `dev-env` and run `> helm dependency build`  sim for `prod-env`
+3) From `environment` dir run the command `> helm upgrade dev-deployment dev-env`
+4) Check the pod count its changed from 1 to 2 in GCP

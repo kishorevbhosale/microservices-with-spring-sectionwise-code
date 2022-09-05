@@ -24,4 +24,4 @@ dependencies:
   repository: file://../../skbank-services/gatewayserver
   version: 0.1.0
 digest: sha256:5d6cdeb139c81c0a7f36d220b4d77ccc26fec6f59404e341d0b9c34dfdd24911
-generated: "2022-09-05T08:46:22.8925024+05:30"
+generated: "2022-09-05T21:51:06.9717389+05:30"
