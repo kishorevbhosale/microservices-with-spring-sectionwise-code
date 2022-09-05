@@ -21,3 +21,13 @@ Installation Details
    - click on name and in details -> ip address -> update this ip adress in host file
    - open the default Frontend link -> you will get nginx page
    - `> helm uninstall sample-deployment` this single command deletes all your deployments
+
+**Create service charts :** 
+1) create folder skbank-service
+2) open the terminal inside `skbank-service`
+3) run the command to create accounts related helm chart `> helm create account`
+4) update the `dependency` in `Charts.yml`
+5) update the `values.yml`
+6) add `deployment.yaml` and `service.yaml` files.
+7) run the command to add dependency `> helm dependency build`
+8) follow step 3 to 7 for different services (cards, loans, configserver, eurekaserver, gatewayserver, zipkin)
