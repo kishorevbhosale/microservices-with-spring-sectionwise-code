@@ -40,3 +40,20 @@ Installation Details
 5) run the command to add dependency `> helm dependency build`
 6) Verify dependencies added in `charts` dir
 7) check your manifest file created properly -> go to prod-env and run the command `> helm template .` sim. try in dev-env
+
+
+**Install Helm charts into k8s cluster :**
+1) go to `environment` dir and run the command `> helm install dev-deployment dev-env` will give following type of output
+```aidl
+W0905 09:03:03.396243   12344 gcp.go:120] WARNING: the gcp auth plugin is deprecated in v1.22+, unavailable in v1.25+; use gcloud instead.
+To learn more, consult https://cloud.google.com/blog/products/containers-kubernetes/kubectl-auth-changes-in-gke
+NAME: dev-deployment
+LAST DEPLOYED: Mon Sep  5 09:03:05 2022
+NAMESPACE: default
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+```
+2) Check details in `Secrets and ConfigMaps` in GCP
+3) Check all services are running in `Services & Ingress` in GCP
+4) Check Endpoints for all services listed inside GCP
