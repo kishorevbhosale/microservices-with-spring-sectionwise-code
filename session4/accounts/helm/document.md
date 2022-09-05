@@ -31,3 +31,12 @@ Installation Details
 6) add `deployment.yaml` and `service.yaml` files.
 7) run the command to add dependency `> helm dependency build`
 8) follow step 3 to 7 for different services (cards, loans, configserver, eurekaserver, gatewayserver, zipkin)
+
+**Create env specific charts**
+1) create dir `environment` under this create charts `dev-env` and `prod-env` using command `> helm create dev-env`
+2) Add dependencies in `Chart.yml` in both prod-env and dev-env
+3) Update values in `values.yml` in both prod-env and dev-env
+4) Add `configmap.yml` in both prod-env and dev-env
+5) run the command to add dependency `> helm dependency build`
+6) Verify dependencies added in `charts` dir
+7) check your manifest file created properly -> go to prod-env and run the command `> helm template .` sim. try in dev-env

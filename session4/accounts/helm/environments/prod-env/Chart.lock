@@ -1,0 +1,27 @@
+dependencies:
+- name: skbank-common
+  repository: file://../../skbank-common
+  version: 0.1.0
+- name: zipkin
+  repository: file://../../skbank-services/zipkin
+  version: 0.1.0
+- name: configserver
+  repository: file://../../skbank-services/configserver
+  version: 0.1.0
+- name: eurekaserver
+  repository: file://../../skbank-services/eurekaserver
+  version: 0.1.0
+- name: accounts
+  repository: file://../../skbank-services/accounts
+  version: 0.1.0
+- name: cards
+  repository: file://../../skbank-services/cards
+  version: 0.1.0
+- name: loans
+  repository: file://../../skbank-services/loans
+  version: 0.1.0
+- name: gatewayserver
+  repository: file://../../skbank-services/gatewayserver
+  version: 0.1.0
+digest: sha256:5d6cdeb139c81c0a7f36d220b4d77ccc26fec6f59404e341d0b9c34dfdd24911
+generated: "2022-09-05T08:46:22.8925024+05:30"
