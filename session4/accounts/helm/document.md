@@ -99,6 +99,13 @@ REVISION        UPDATED                         STATUS          CHART           
 > helm uninstall dev-deployment
 ```
 
+
+Securing Microservices using K8s Cluster:
+---
+1) We have 3 services (accounts, cards, loans) which can be accessed directly by using IP address of individual service
+2) We can access 3 services using gatewayserver as well 
+3) So here securing services, authrization and authentication of service is main challenge.
+
 ## Helm Commands used in the course
 
 |     Helm Command       |     Description          |
