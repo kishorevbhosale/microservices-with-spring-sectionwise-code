@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @RestController
@@ -74,7 +75,8 @@ public class AccountsController {
     @GetMapping("/sayHello")
     @RateLimiter(name = "sayHello", fallbackMethod = "sayHelloFallback")
     public String sayHello() {
-        return "Hello, Welcome to SKBank Kubernetes cluster demo code";
+        Optional<String> podName = Optional.ofNullable(System.getenv("HOSTNAME"));
+        return "Hello, Welcome to SKBank Kubernetes cluster from : "+podName.get();
     }
 
     private String sayHelloFallback(Throwable t) {
