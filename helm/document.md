@@ -111,6 +111,130 @@ Securing Microservices using K8s Cluster:
 2) By default the type is `ClusterIP` so if we keep this field as empthy then also it will treat as `ClusterIP`
 3) Updated `accounts` image with hostname
 
+**_NodePort :_**
+1) Changed `account` service values from `dev-env` dir -> `service: type: NodePort`
+2) Port number is not mentioned so it will take the default port number in range between (30k to 32k)
+3) Rebuild chart `> helm dependencies build`
+4) Upgrage the deployment `> helm upgrade sample-deployment dev-env`
+5) check nodes available in cluster `> kubectl get nodes`
+```aidl
+W0909 05:44:05.082031   14400 gcp.go:120] WARNING: the gcp auth plugin is deprecated in v1.22+, unavailable in v1.25+; use gcloud instead.
+To learn more, consult https://cloud.google.com/blog/products/containers-kubernetes/kubectl-auth-changes-in-gke
+NAME                                       STATUS   ROLES    AGE   VERSION
+gke-cluster-1-default-pool-cd5ab4c4-9vmp   Ready    <none>   24m   v1.22.11-gke.400
+gke-cluster-1-default-pool-cd5ab4c4-lltx   Ready    <none>   24m   v1.22.11-gke.400
+gke-cluster-1-default-pool-cd5ab4c4-szmm   Ready    <none>   24m   v1.22.11-gke.400
+```
+But here we didnt get info about which is worker node
+
+6) To get the worker node details : `> kubectl get nodes --output wide`
+```aidl
+W0909 05:44:34.756100   17788 gcp.go:120] WARNING: the gcp auth plugin is deprecated in v1.22+, unavailable in v1.25+; use gcloud instead.
+To learn more, consult https://cloud.google.com/blog/products/containers-kubernetes/kubectl-auth-changes-in-gke
+NAME                                       STATUS   ROLES    AGE   VERSION            INTERNAL-IP   EXTERNAL-IP      OS-IMAGE                             KERNEL-VERSION   CONTAINER-RUNTIME
+gke-cluster-1-default-pool-cd5ab4c4-9vmp   Ready    <none>   25m   v1.22.11-gke.400   10.128.0.40   x.x.x.x         Container-Optimized OS from Google   5.10.109+        containerd://1.5.13
+gke-cluster-1-default-pool-cd5ab4c4-lltx   Ready    <none>   25m   v1.22.11-gke.400   10.128.0.38   x.x.x.x         Container-Optimized OS from Google   5.10.109+        containerd://1.5.13
+gke-cluster-1-default-pool-cd5ab4c4-szmm   Ready    <none>   25m   v1.22.11-gke.400   10.128.0.39   x.x.x.x         Container-Optimized OS from Google   5.10.109+        containerd://1.5.13
+```
+7) Now check account service is running in which pods : `> kubectl get pods`
+```aidl
+NAME                                        READY   STATUS    RESTARTS      AGE
+accounts-deployment-d8489b579-bvvqq         1/1     Running   2 (26m ago)   26m
+accounts-deployment-d8489b579-f2m9h         1/1     Running   1 (26m ago)   26m
+cards-deployment-945cb65-bs5bk              1/1     Running   2 (26m ago)   26m
+configserver-deployment-5457948984-g955b    1/1     Running   0             26m
+eurekaserver-deployment-7cc7bcc694-lnhxt    1/1     Running   2 (26m ago)   26m
+gatewayserver-deployment-685c68554c-blnhn   1/1     Running   1 (26m ago)   26m
+loans-deployment-556647c845-f7jr5           1/1     Running   0             26m
+zipkin-deployment-69c646f9fd-7wzfl          1/1     Running   0             26m
+```
+8) Now describe the pod details of account service to find the node details `> kubectl describe pod <pod-name>`  
+```aidl
+> kubectl describe pod accounts-deployment-d8489b579-bvvqq
+Name:         accounts-deployment-d8489b579-bvvqq
+Namespace:    default
+Priority:     0
+Node:         gke-cluster-1-default-pool-cd5ab4c4-lltx/10.128.0.38
+Start Time:   Fri, 09 Sep 2022 05:22:52 +0530
+Labels:       app=accounts
+              pod-template-hash=d8489b579
+Annotations:  <none>
+Status:       Running
+IP:           10.4.0.6
+IPs:
+  IP:           10.4.0.6
+Controlled By:  ReplicaSet/accounts-deployment-d8489b579
+Containers:
+  accounts:
+    Container ID:   containerd://970628b746114c8bf7acf9bfe0aa92e796bddc9ca8306f8e99d69ba96f870911
+    Image:          kishorevbhosale/accounts:latest
+    Image ID:       docker.io/kishorevbhosale/accounts@sha256:41183f6fdc4397499d874e2a87f8fc901530cdab2d8b485b588409a393b87108
+    Port:           8080/TCP
+    Host Port:      0/TCP
+    State:          Running
+      Started:      Fri, 09 Sep 2022 05:23:42 +0530
+    Last State:     Terminated
+      Reason:       Error
+      Exit Code:    1
+      Started:      Fri, 09 Sep 2022 05:23:23 +0530
+      Finished:     Fri, 09 Sep 2022 05:23:26 +0530
+    Ready:          True
+    Restart Count:  2
+    Environment:
+      SPRING_PROFILES_ACTIVE:                <set to the key 'SPRING_PROFILES_ACTIVE' of config map 'skbankdev-configmap'>                Optional: false
+      SPRING_ZIPKIN_BASEURL:                 <set to the key 'SPRING_ZIPKIN_BASEURL' of config map 'skbankdev-configmap'>                 Optional: false
+      SPRING_CONFIG_IMPORT:                  <set to the key 'SPRING_CONFIG_IMPORT' of config map 'skbankdev-configmap'>                  Optional: false
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE:  <set to the key 'EUREKA_CLIENT_SERVICEURL_DEFAULTZONE' of config map 'skbankdev-configmap'>  Optional: false
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-55px8 (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             True
+  ContainersReady   True
+  PodScheduled      True
+Volumes:
+  kube-api-access-55px8:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason     Age                From               Message
+  ----     ------     ----               ----               -------
+  Normal   Scheduled  30m                default-scheduler  Successfully assigned default/accounts-deployment-d8489b579-bvvqq to gke-cluster-1-default-pool-cd5ab4c4-lltx
+  Normal   Pulled     30m                kubelet            Successfully pulled image "kishorevbhosale/accounts:latest" in 20.40467642s
+  Normal   Pulled     30m                kubelet            Successfully pulled image "kishorevbhosale/accounts:latest" in 420.480318ms
+  Warning  BackOff    30m                kubelet            Back-off restarting failed container
+  Normal   Pulling    29m (x3 over 30m)  kubelet            Pulling image "kishorevbhosale/accounts:latest"
+  Normal   Created    29m (x3 over 30m)  kubelet            Created container accounts
+  Normal   Started    29m (x3 over 30m)  kubelet            Started container accounts
+  Normal   Pulled     29m                kubelet            Successfully pulled image "kishorevbhosale/accounts:latest" in 422.458135ms
+```
+9) check all the running project inside gcp `> gcloud projects list`
+```aidl
+PROJECT_ID             NAME              PROJECT_NUMBER
+sbtest-150402          sbTest            411582550214
+symmetric-lock-360912  My First Project  984566451572
+utopian-button-151310  My Project        263431673942
+```
+
+10) Make `sbtest-150402 ` as your default project `> gcloud config set project sbtest-150402` **Firewall configuration set for this project only**
+11) Allow traffic to your service `> gcloud compute firewall-rules create skbankaccount-nodeport --allow tcp:32713`
+```aidl
+Creating firewall...-Created [https://www.googleapis.com/compute/v1/projects/sbtest-150402/global/firewalls/skbankaccount-nodeport].
+Creating firewall...done.
+NAME                    NETWORK  DIRECTION  PRIORITY  ALLOW      DENY  DISABLED
+skbankaccount-nodeport  default  INGRESS    1000      tcp:32713        False
+```
+Now we will get the successful response on `http://x.x.x.x:32713/sayHello`
+
+
 ## Helm Commands used in the course
 
 |     Helm Command       |     Description          |
