@@ -16,7 +16,7 @@ quay.io/keycloak/keycloak:19.0.1 start-dev`
 3) List of url supported by keycloak : http://localhost:7080/realms/master/.well-known/openid-configuration
 4) We need token_endpoint: http://localhost:7080/realms/master/protocol/openid-connect/token url 
 5) POST call details :
-      ```aidl
+      ```yaml
       URL : http://localhost:7080/realms/master/protocol/openid-connect/token
       Body: 
       content-type : x-www-form-urlencoded
@@ -28,7 +28,7 @@ quay.io/keycloak/keycloak:19.0.1 start-dev`
 6) go to https://jwt.io/ and check the access token details 
 7) Copy all services from session 4 to keycloak folder and update gatewayserver with above details
 8) Open the pom.xml of the microservices gatewayserver and make sure to add the below required dependencies of Spring Security,OAuth2.
-   ```aidl
+   ```yaml
    <dependency>
      <groupId>org.springframework.boot</groupId>
      <artifactId>spring-boot-starter-security</artifactId>
@@ -50,7 +50,7 @@ quay.io/keycloak/keycloak:19.0.1 start-dev`
     - Simi. check for cards - http://localhost:8072/skbank/cards/cards/properties -> `HTTP ERROR 401`
     - We have not secured loan service: http://localhost:8072/skbank/loans/loans/properties -> return proper response
 13) POST call for accessing accounts service
-    ```aidl
+    ```yaml
     URL : http://localhost:8072/skbank/cards/cards/properties
     Headers:
     Content-Type:application/json
