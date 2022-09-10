@@ -1,0 +1,7 @@
+com\bi\chanakya\loans\config\LoanServiceConfig.class
+com\bi\chanakya\loans\model\Customer.class
+com\bi\chanakya\loans\model\Loans.class
+com\bi\chanakya\loans\model\Properties.class
+com\bi\chanakya\loans\controller\LoansController.class
+com\bi\chanakya\loans\repository\LoansRepository.class
+com\bi\chanakya\loans\LoansApplication.class

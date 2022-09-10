@@ -1,0 +1,12 @@
+com\bi\chanakya\accounts\model\Accounts.class
+com\bi\chanakya\accounts\model\Cards.class
+com\bi\chanakya\accounts\model\CustomerDetails.class
+com\bi\chanakya\accounts\client\CardsFeignClient.class
+com\bi\chanakya\accounts\client\LoansFeignClient.class
+com\bi\chanakya\accounts\controller\AccountsController.class
+com\bi\chanakya\accounts\AccountsApplication.class
+com\bi\chanakya\accounts\config\AccountServiceConfig.class
+com\bi\chanakya\accounts\model\Loans.class
+com\bi\chanakya\accounts\repository\AccountsRepository.class
+com\bi\chanakya\accounts\model\Properties.class
+com\bi\chanakya\accounts\model\Customer.class
