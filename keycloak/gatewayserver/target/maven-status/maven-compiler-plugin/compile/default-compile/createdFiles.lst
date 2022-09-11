@@ -1,5 +1,0 @@
-com\bi\chanakya\gatewayserver\filters\RequestTraceFilter.class
-com\bi\chanakya\gatewayserver\filters\FilterUtility.class
-com\bi\chanakya\gatewayserver\GatewayserverApplication.class
-com\bi\chanakya\gatewayserver\config\SecurityConfig.class
-com\bi\chanakya\gatewayserver\filters\ResponseTraceFilter.class

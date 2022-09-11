@@ -1,7 +1,0 @@
-com\bi\chanakya\cards\model\Properties.class
-com\bi\chanakya\cards\repository\CardsRepository.class
-com\bi\chanakya\cards\controller\CardsController.class
-com\bi\chanakya\cards\model\Customer.class
-com\bi\chanakya\cards\config\CardsServiceConfig.class
-com\bi\chanakya\cards\CardsApplication.class
-com\bi\chanakya\cards\model\Cards.class
