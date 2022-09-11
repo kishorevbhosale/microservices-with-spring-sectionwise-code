@@ -116,3 +116,18 @@ $ echo Password: $(kubectl get secret --namespace default my-release-keycloak -o
 2) added values in each service -> `values.yml` -> `keycloak_enabled`
 3) in `dev-env` and `prod-env` updated `values.yml` -> added property `keyCloakURL`
 4) rebuild all helm charts
+5) deploy the helm chart
+6) check the config details in `Secrete & ConfigMap` section
+
+_NOTE_ : Update the ip address in `keyCloakURL` property
+
+**Access deployed keycloak and test secured microservice :**
+1) get token to access service : login to keycloakserver and fetch following details
+    ```yaml
+    url : http://<ip-address-keycloak>:7080/realms/master/protocol/openid-connect/token
+    client_id:skbank-callcenter
+    client_secret:OYTxSwP5jeHndk13JPUXYSR4qmylhuvS
+    scope:openid
+    grant_type:client_credentials 
+   ```
+2) Access the services, and you will find that every request is authenticated
