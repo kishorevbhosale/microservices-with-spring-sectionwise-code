@@ -1,0 +1,6 @@
+dependencies:
+- name: skbank-common
+  repository: file://../../skbank-common
+  version: 0.1.0
+digest: sha256:446f05eeb745aa64a91f61fcb543be6f6c3a18faba87bb2896005534869adaa0
+generated: "2022-09-11T10:36:30.0061494+05:30"

@@ -1,0 +1,7 @@
+global:
+  configMapName: skbankdev-configmap
+  zipkinBaseURL: http://zipkin:9411/
+  activeProfile: dev
+  configServerURL: configserver:http://configserver:8071/
+  eurekaServerURL: http://eurekaserver:8070/eureka/
+  keyCloakURL: http://34.136.121.141/realms/master/protocol/openid-connect/certs
