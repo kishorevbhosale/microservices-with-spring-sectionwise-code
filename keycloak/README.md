@@ -110,3 +110,9 @@ $ echo Password: $(kubectl get secret --namespace default my-release-keycloak -o
    - access type : confidential
    - service account enabled : on <br />
    save and get credential.
+
+** Updated helm charts :**
+1) updated `skbank-common` -> `templates` -> `configmap.yml` and `deployment.yml` file
+2) added values in each service -> `values.yml` -> `keycloak_enabled`
+3) in `dev-env` and `prod-env` updated `values.yml` -> added property `keyCloakURL`
+4) rebuild all helm charts
