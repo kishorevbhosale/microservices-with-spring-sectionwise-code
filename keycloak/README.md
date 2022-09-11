@@ -131,3 +131,16 @@ _NOTE_ : Update the ip address in `keyCloakURL` property
     grant_type:client_credentials 
    ```
 2) Access the services, and you will find that every request is authenticated
+
+**Authorization of services :**
+1) go to keycloak server 
+   - open tab `Roles` from left panel  
+   - Add role `ACCOUNTS`
+   - go to client created -> `skbank-callcenter` -> go to last tab `Service and Account Roles`
+   - Add newly created role i.e. `ACCOUNTS`
+   - For verification decode token (http://jwt.io)and check roles added
+2) update the `gatewayserver` service -> add new class `KeycloakRoleConverter`
+3) update class `SecurityWebFilterChain.java`
+4) create docker image again and push to docker hub
+5) uninstall and install helm chart again
+6) Now you will see that account service is authorized
