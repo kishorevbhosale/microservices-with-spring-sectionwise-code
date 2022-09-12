@@ -303,9 +303,14 @@ to deploy the applicable microservices into kubernetes cluster.
 
 |     Docker Command       |     Description          |
 | ------------- | ------------- |
-| "docker build . -t eazybytes/accounts" | To generate a docker image based on a Dockerfile |
-| "docker run  -p 8081:8080 eazybytes/accounts" | To start a docker container based on a given image |
+| "docker build . -t <image-name>" | To generate a docker image based on a Dockerfile |
+| "docker run  -p 8081:8080 <image-name>" | To start a docker container based on a given image |
 | "docker images" | To list all the docker images present in the Docker server |
+| "docker image pull ubuntu:latest | Pull the docker image |
+| "docker images --filter dangling=true" | Filter the docker images. List image with tag as none |
+| "docker images --filter dangling=flase" | List all images with tag other than none |
+| "docker images --filter=reference="*:latest" | List all images with tg as latest |
+| "docker images --format "{{ .Repository}}: {{.Tag}}:{{.Size}}" | List images with mentioned format |
 | "docker image inspect image-id" | To display detailed image information for a given image id |
 | "docker image rm image-id" | To remove one or more images for a given image ids |
 | "docker image push docker.io/eazybytes/accounts" | To push an image or a repository to a registry |
